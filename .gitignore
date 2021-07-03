@@ -1,3 +1,5 @@
+certs/*
+
 .DS-Store
 # Logs
 logs
