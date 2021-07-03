@@ -15,7 +15,9 @@ const helmet = require("helmet");
 
 
 const app = express();
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false
+}));
 
 //Proxy Related
 const PORT = process.env.AUTH_PORT;
