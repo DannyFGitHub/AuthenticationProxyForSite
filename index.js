@@ -9,9 +9,13 @@ const rfs = require('rotating-file-stream');
 const Repository = require('./Repository.js');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const Whitelist = require('./Whitelist.js');
+const helmet = require("helmet");
+
 (require('dotenv')).config();
 
+
 const app = express();
+app.use(helmet());
 
 //Proxy Related
 const PORT = process.env.AUTH_PORT;
