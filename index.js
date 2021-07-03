@@ -240,7 +240,6 @@ app.use((err, req, res, next) => {
 //     console.log(`Booting ${HOST}:${PORT}`);
 // });
 
-let server = https.createServer(options, app);
 server.listen(PORT, HOST, () => {
     console.log(`Booting ${HOST}:${PORT}`);
 });
