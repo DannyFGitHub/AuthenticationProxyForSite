@@ -6,6 +6,7 @@ const Protection = require('./Protection.js');
 const morgan = require("morgan");
 const path = require('path');
 const https = require('https');
+const fs = require('fs');
 const rfs = require('rotating-file-stream');
 const Repository = require('./Repository.js');
 const { createProxyMiddleware } = require('http-proxy-middleware');
