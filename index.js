@@ -5,31 +5,19 @@ const bodyParser = require('body-parser');
 const Protection = require('./Protection.js');
 const morgan = require("morgan");
 const path = require('path');
-const https = require('https');
 const fs = require('fs');
 const rfs = require('rotating-file-stream');
 const Repository = require('./Repository.js');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const Whitelist = require('./Whitelist.js');
-const helmet = require("helmet");
-
 (require('dotenv')).config();
 
-let key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
-let cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
-let options = {
-  key: key,
-  cert: cert
-};
-
 const app = express();
-app.use(helmet());
 
 //Proxy Related
 const PORT = process.env.AUTH_PORT;
 const HOST = process.env.AUTH_HOST;
 const PROGRAM_SERVICE_URL = process.env.PROGRAM_SERVICE_URL;
-
 
 /////// LOGIN
 
@@ -232,11 +220,7 @@ app.use((err, req, res, next) => {
     next();
 });
 
-// // Start the Proxy
-// app.listen(PORT, HOST, () => {
-//     console.log(`Booting ${HOST}:${PORT}`);
-// });
-
-server.listen(PORT, HOST, () => {
+// Start the Proxy
+app.listen(PORT, HOST, () => {
     console.log(`Booting ${HOST}:${PORT}`);
 });
