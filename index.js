@@ -25,8 +25,6 @@ let options = {
 const app = express();
 app.use(helmet());
 
-let server = https.createServer(options, app);
-
 //Proxy Related
 const PORT = process.env.AUTH_PORT;
 const HOST = process.env.AUTH_HOST;
