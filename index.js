@@ -15,18 +15,17 @@ const helmet = require("helmet");
 
 (require('dotenv')).config();
 
-let key = fs.readFileSync(__dirname + '/../certs/selfsigned.key');
-let cert = fs.readFileSync(__dirname + '/../certs/selfsigned.crt');
+let key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
+let cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
 let options = {
   key: key,
   cert: cert
 };
-let server = https.createServer(options, app);
 
 const app = express();
-app.use(helmet({
-    contentSecurityPolicy: false
-}));
+app.use(helmet());
+
+let server = https.createServer(options, app);
 
 //Proxy Related
 const PORT = process.env.AUTH_PORT;
