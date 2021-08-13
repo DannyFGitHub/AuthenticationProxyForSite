@@ -27,7 +27,6 @@ app.use(
   helmet({
     contentSecurityPolicy: false,
     noSniff: false,
-    xssFilter: false,
   })
 );
 
