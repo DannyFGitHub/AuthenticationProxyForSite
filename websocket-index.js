@@ -37,6 +37,17 @@ const PORT = process.env.WS_PORT;
 const HOST = process.env.AUTH_HOST;
 const PROGRAM_SERVICE_WEBSOCKET_URL = process.env.PROGRAM_SERVICE_WEBSOCKET_URL;
 
+const requireAuth = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.render("login", {
+      message: "Please login to continue",
+      messageClass: "alert-danger",
+    });
+  }
+};
+
 app.use(
   "/",
   requireAuth,
