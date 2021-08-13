@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index",
     "whitelist": "node whitelister",
-    "pm2start": "pm2 start index.js"
+    "pm2start": "pm2 start index.js",
+    "pm2startWS": "pm2 start websocket-index.js"
   },
   "author": "",
   "license": "ISC",

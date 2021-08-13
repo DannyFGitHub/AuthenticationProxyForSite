@@ -224,7 +224,6 @@ app.use(
   createProxyMiddleware({
     target: PROGRAM_SERVICE_URL,
     changeOrigin: true,
-    ws: true, //Include Websockets (proxy websockets)
     pathRewrite: {
       [`^/`]: "",
     },
