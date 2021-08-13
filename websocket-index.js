@@ -37,9 +37,27 @@ const PORT = process.env.WS_PORT;
 const HOST = process.env.AUTH_HOST;
 const PROGRAM_SERVICE_WEBSOCKET_URL = process.env.PROGRAM_SERVICE_WEBSOCKET_URL;
 
+//////////////
+
+// To support URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+// To parse cookies from the HTTP Request
+app.use(cookieParser());
+
+const requireAuth = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.render("login", {
+      message: "Please login to continue",
+      messageClass: "alert-danger",
+    });
+  }
+};
+
 app.use(
   "/",
-  null,
+  requireAuth,
   createProxyMiddleware({
     target: PROGRAM_SERVICE_WEBSOCKET_URL,
     changeOrigin: true,
@@ -49,6 +67,15 @@ app.use(
     },
   })
 );
+
+// Parse Errors to prevent stack trace from showing
+app.use((err, req, res, next) => {
+  if (err) {
+    console.log(err);
+    return res.render("505");
+  }
+  next();
+});
 
 server.listen(PORT, HOST, () => {
   console.log(`Booting ${HOST}:${PORT}`);
